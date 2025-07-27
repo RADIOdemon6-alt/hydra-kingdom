@@ -14,19 +14,14 @@ body {
   text-align: center;
 }
 
-.gear-btn {
+.compass-btn {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 80px;
-  height: 80px;
+  font-size: 3rem;
   cursor: pointer;
   transition: transform 1s;
-}
-
-.gear-btn img {
-  width: 100%;
-  height: 100%;
+  filter: drop-shadow(0 0 10px #FFD700);
 }
 
 .side-menu {
@@ -126,4 +121,4 @@ body {
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  }
+}
