@@ -21,7 +21,6 @@ body {
   z-index: 1000;
 }
 
-/* اللوجو */
 .logo-box {
   position: absolute;
   left: 20px;
@@ -36,7 +35,6 @@ body {
   object-fit: contain;
 }
 
-/* عنوان المملكة */
 .top-bar h1 {
   font-size: 2rem;
   color: #FFD700;
@@ -91,22 +89,18 @@ body {
 
 /* المحتوى الرئيسي */
 .main-content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto;
   align-items: center;
-  margin-top: 180px;
+  justify-items: center;
   gap: 20px;
+  margin-top: 150px;
 }
 
-/* صف الأزرار */
-.button-row {
-  display: flex;
-  justify-content: space-between;
-  width: 340px;
-}
-
-/* الأزرار */
-#featuresBtn, #requirementsBtn {
+/* زر الشروط */
+#requirementsBtn {
+  grid-column: 1;
   width: 140px;
   height: 140px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
@@ -126,15 +120,31 @@ body {
   transition: all 0.3s;
 }
 
-#featuresBtn:hover, #requirementsBtn:hover {
-  transform: skew(-5deg) translateY(-3px);
-  box-shadow: inset -1px -1px 3px rgba(255,255,255,0.5),
-              inset 1px 1px 3px rgba(0,0,0,0.7),
-              0 10px 20px rgba(0,0,0,0.8);
+/* زر المميزات */
+#featuresBtn {
+  grid-column: 3;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(145deg, #FFD700, #cc9900);
+  border: 2px solid #9a7e00;
+  color: #1a1a1a;
+  font-size: 1rem;
+  border-radius: 20px;
+  box-shadow: 
+    inset -2px -2px 5px rgba(255,255,255,0.3),
+    inset 2px 2px 5px rgba(0,0,0,0.5),
+    0 5px 15px rgba(0,0,0,0.7);
+  transform: skew(-5deg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
 }
 
-/* الملاحظة تحت الأزرار */
+/* الملاحظة */
 .note-box {
+  grid-column: 1 / span 3;
   width: 340px;
   height: 80px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
