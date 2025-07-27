@@ -1,93 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio </title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مملكة هــيـدࢪا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="auth-wrapper">
-            <!-- Login Form -->
-            <div id="loginForm" class="form-container active">
-                <h2>Login</h2>
-                <form id="loginFormElement">
-                    <div class="input-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" name="email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-                <p class="switch-form">
-                    Don't have an account? 
-                    <a href="#" id="showRegister">Register here</a>
-                </p>
-            </div>
 
-            <!-- Registration Form -->
-            <div id="registerForm" class="form-container">
-                <h2>Register</h2>
-                <form id="registerFormElement">
-                    <div class="input-group">
-                        <label for="registerUsername">Username</label>
-                        <input type="text" id="registerUsername" name="username" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" name="email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" name="password" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="timedPassword">Timed Password</label>
-                        <input type="password" id="timedPassword" name="timedPassword" placeholder="Optional temporary password">
-                        <small class="help-text">This password will expire after a set time period</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-                <p class="switch-form">
-                    Already have an account? 
-                    <a href="#" id="showLogin">Login here</a>
-                </p>
-            </div>
-
-            <!-- Success/Error Messages -->
-            <div id="messageContainer" class="message-container">
-                <div id="successMessage" class="message success hidden">
-                    <span id="successText"></span>
-                </div>
-                <div id="errorMessage" class="message error hidden">
-                    <span id="errorText"></span>
-                </div>
-            </div>
-
-            <!-- User Dashboard -->
-            <div id="userDashboard" class="dashboard hidden">
-                <h2>Welcome!</h2>
-                <div class="user-info">
-                    <p><strong>Username:</strong> <span id="displayUsername"></span></p>
-                    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
-                    <p><strong>User ID:</strong> <span id="displayUserId"></span></p>
-                </div>
-                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
-            </div>
-        </div>
+  <div class="container">
+    <!-- زر الترس -->
+    <div class="gear-btn" id="gearBtn">
+      <img src="/assets/images/logo.png" alt="HYDRA Logo">
     </div>
 
-    
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-    
-    
-    <script type="module" src="script.js"></script>
+    <!-- قائمة جانبية -->
+    <div class="side-menu" id="sideMenu">
+      <a href="#">روابط المملكة</a>
+      <a href="#">استمارات المملكة</a>
+      <a href="#">الرتب العليا</a>
+      <a href="#">النقابات</a>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+      <h1>⚔️ مملكة هــيـدࢪا ⚔️</h1>
+      
+      <!-- زر مميزات الانضمام -->
+      <button class="main-btn" id="featuresBtn">✨ مميزات الانضمام ✨</button>
+
+      <!-- زر شروط الانضمام -->
+      <button class="main-btn" id="requirementsBtn">📝 شروط الانضمام 📝</button>
+
+      <!-- الصندوق الذهبي الثلاثي الأبعاد -->
+      <div class="golden-box">
+        <p>⚜️ نظام عملة النقابة مفتوح فقط للعقود الدائمة مع المملكة، أما المؤقتة فلا ⚜️</p>
+      </div>
+    </div>
+
+    <!-- نافذة مميزات الانضمام -->
+    <div class="popup" id="featuresPopup">
+      <div class="popup-content">
+        <h2>مميزات الانضمام</h2>
+        <ul>
+          <li>بوت حماية أساسي من الروابط الغريبة</li>
+          <li>بوت استقبال وتسجيل أعضاء</li>
+          <li>بوت شير خفي وجماعي</li>
+          <li>تصاميم صور أسطورية</li>
+          <li>إدارة قوية جداً مع خطة تطوير مجربة</li>
+          <li>استمارات بأحدث وأفضل التصاميم + فعاليات جديدة</li>
+          <li>مسابقات جوائز مادية ومعنوية</li>
+          <li>نظام إدارة وحكم جديد + رواتب شهرية للأعضاء</li>
+          <li>عملة خاصة بالنقابة لتطويرها (تفاصيل عند الانضمام)</li>
+        </ul>
+        <button class="close-btn" id="closeFeatures">إغلاق</button>
+      </div>
+    </div>
+
+    <!-- نافذة شروط الانضمام -->
+    <div class="popup" id="requirementsPopup">
+      <div class="popup-content">
+        <h2>شروط الانضمام</h2>
+        <ul>
+          <li>نقابة فوق الـ50 عضو</li>
+          <li>تفاعل يومي قوي</li>
+          <li>أعضاء ومشرفين محترمين</li>
+        </ul>
+        <button class="close-btn" id="closeRequirements">إغلاق</button>
+      </div>
+    </div>
+
+  </div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
