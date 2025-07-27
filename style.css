@@ -1,4 +1,4 @@
-body {
+  body {
   margin: 0;
   padding: 0;
   font-family: 'Pirata One', cursive;
@@ -95,23 +95,24 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 100px;
 }
 
-/* الأزرار بجانب بعض */
+/* الأزرار جنب بعض */
 .buttons-row {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
-/* الأزرار بشكل مربع 3D */
+/* الأزرار */
 .custom-btn {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
   border: 2px solid #9a7e00;
   color: #1a1a1a;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 20px;
   box-shadow: 
     inset -2px -2px 5px rgba(255,255,255,0.3),
@@ -129,10 +130,11 @@ body {
               0 10px 20px rgba(0,0,0,0.8);
 }
 
-/* الملاحظة */
+/* الملاحظة تحت الأزرار */
 .note-box {
-  width: 320px;
-  height: 70px;
+  margin-top: 20px;
+  width: 340px;
+  height: 80px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
   border-radius: 15px;
   box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.3),
@@ -147,22 +149,11 @@ body {
   transform: skew(-5deg);
   transition: transform 0.7s ease, opacity 0.7s ease;
 }
+
 /* العناصر تختفي عند فتح القائمة */
 .hide {
   transform: translateY(100px);
   opacity: 0;
-}
-
-/* نقش ملكي في الخلفية */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('royal-pattern.png') repeat;
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 0;
 }
 .popup {
   position: fixed;
