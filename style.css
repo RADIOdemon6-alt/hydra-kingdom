@@ -1,4 +1,4 @@
-  body {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Pirata One', cursive;
@@ -98,15 +98,8 @@
   margin-top: 100px;
 }
 
-/* الأزرار جنب بعض */
-.buttons-row {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-/* الأزرار */
-.custom-btn {
+/* الأزرار جنب بعض يمين ويسار */
+#featuresBtn, #requirementsBtn {
   width: 150px;
   height: 150px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
@@ -121,13 +114,35 @@
   transform: skew(-5deg);
   cursor: pointer;
   transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.custom-btn:hover {
+#featuresBtn:hover, #requirementsBtn:hover {
   transform: skew(-5deg) translateY(-3px);
   box-shadow: inset -1px -1px 3px rgba(255,255,255,0.5),
               inset 1px 1px 3px rgba(0,0,0,0.7),
               0 10px 20px rgba(0,0,0,0.8);
+}
+
+/* نلف الأزرار داخل Flexbox صف */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content > #featuresBtn, 
+.main-content > #requirementsBtn {
+  margin: 0 20px;
+}
+
+/* نضع الأزرار في صف */
+.main-content-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 340px; /* نفس عرض note-box */
 }
 
 /* الملاحظة تحت الأزرار */
@@ -155,6 +170,8 @@
   transform: translateY(100px);
   opacity: 0;
 }
+
+/* Popup */
 .popup {
   position: fixed;
   top: 0; left: 0;
@@ -206,4 +223,4 @@
 
 .close-btn:hover {
   transform: translateY(-2px);
-} 
+}
