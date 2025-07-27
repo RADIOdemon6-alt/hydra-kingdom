@@ -10,8 +10,8 @@ const closeRequirements = document.getElementById('closeRequirements');
 let menuOpen = false;
 
 compassBtn.addEventListener('click', () => {
-  compassBtn.style.transform = menuOpen ? 'rotate(0deg)' : 'rotate(360deg)';
-  sideMenu.style.left = menuOpen ? '-300px' : '0';
+  compassBtn.style.transform = menuOpen ? 'translateY(20px)' : 'translateY(20px) rotate(360deg)';
+  sideMenu.style.right = menuOpen ? '-300px' : '0';
   menuOpen = !menuOpen;
 });
 
