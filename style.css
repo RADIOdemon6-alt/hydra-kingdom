@@ -7,6 +7,7 @@ body {
   overflow-x: hidden;
 }
 
+/* البار العلوي */
 .top-bar {
   position: fixed;
   top: 0;
@@ -26,17 +27,19 @@ body {
   text-shadow: 0 2px #000;
 }
 
+/* زر البوصلة */
 .compass-btn {
   position: fixed;
   top: 80px;
-  right: 20px;
+  right: 30px;
   font-size: 3rem;
   cursor: pointer;
   filter: drop-shadow(0 0 10px #FFD700);
-  transition: transform 0.5s;
   z-index: 999;
+  transition: transform 0.7s ease;
 }
 
+/* القائمة الجانبية */
 .side-menu {
   position: fixed;
   top: 80px;
@@ -61,12 +64,12 @@ body {
   transform: perspective(600px) rotateY(-5deg);
 }
 
-/* ملحوظة المربع العلوي */
+/* الملاحظة (المربع العلوي) */
 .note-box {
   position: fixed;
   top: 100px;
-  left: 20px;
-  width: 220px;
+  left: 30px;
+  width: 240px;
   height: 100px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
   border-radius: 15px;
@@ -80,23 +83,24 @@ body {
   font-size: 0.9rem;
   text-align: center;
   z-index: 900;
-  transition: transform 0.5s, opacity 0.5s;
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
+/* الأزرار الرئيسية */
 .main-content {
-  margin-top: 200px;
-  text-align: center;
+  margin-top: 220px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 }
 
-/* شكل الأزرار نفس الصورة */
 .custom-btn {
-  margin: 20px;
   padding: 15px 40px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
   border: 2px solid #9a7e00;
   color: #1a1a1a;
-  font-size: 1.2rem;
-  border-radius: 10px;
+  font-size: 1.3rem;
+  border-radius: 12px;
   box-shadow: inset -2px -2px 5px rgba(255,255,255,0.3),
               inset 2px 2px 5px rgba(0,0,0,0.5),
               0 4px 10px rgba(0,0,0,0.6);
@@ -111,6 +115,11 @@ body {
               0 8px 20px rgba(0,0,0,0.8);
 }
 
+/* Animation سقوط عند فتح القائمة */
+.hide {
+  transform: translateY(100px);
+  opacity: 0;
+}
 /* Animation اختفاء */
 .hide {
   transform: translateY(100px);
