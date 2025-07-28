@@ -81,15 +81,14 @@ body {
 
 /* المحتوى الرئيسي */
 .main-content {
-  position: relative;
-  width: 100%;
-  margin-top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  transition: transform 0.7s ease, opacity 0.7s ease;
+  gap: 50px;
+  margin-top: 150px;
+  flex-wrap: wrap;
 }
+
 
 .custom-btn {
   width: 140px;
@@ -121,48 +120,47 @@ body {
   transform: translateY(100px);
   opacity: 0;
 }
-.cube-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
-  margin-top: 150px;
-  flex-wrap: wrap;
-}
 
-.cube {
-  width: 200px;
-  height: 200px;
+/* المكعب الذهبي */
+.gold-box {
+  width: 220px;
+  height: 220px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
-  border: 2px solid #9a7e00;
+  border: 3px solid #9a7e00;
   border-radius: 20px;
   box-shadow: 
-    inset -5px -5px 10px rgba(255,255,255,0.3),
-    inset 5px 5px 10px rgba(0,0,0,0.5),
+    inset -5px -5px 15px rgba(255,255,255,0.3),
+    inset 5px 5px 15px rgba(0,0,0,0.5),
     0 10px 25px rgba(0,0,0,0.8);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
   color: #1a1a1a;
-  font-size: 1.2rem;
-  text-align: center;
   text-shadow: 
     1px 1px 2px #fff,
     -1px -1px 2px #b8860b,
     0 0 5px rgba(255, 215, 0, 0.8);
-  position: relative;
-  transform: perspective(600px) rotateY(-5deg);
+  text-align: center;
+  transform: perspective(800px) rotateY(-5deg);
+  transition: transform 0.5s ease;
 }
 
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+.gold-box:hover {
+  transform: perspective(800px) rotateY(0deg) scale(1.05);
+}
+
+/* مجموعة الأزرار */
+.btn-group {
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
-.copy-btn, .go-btn {
-  padding: 10px 20px;
+/* زر ذهبي */
+.gold-btn {
+  padding: 8px 15px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
   border: 2px solid #9a7e00;
   border-radius: 10px;
@@ -174,12 +172,16 @@ body {
     inset 2px 2px 5px rgba(0,0,0,0.5),
     0 5px 15px rgba(0,0,0,0.7);
   transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.copy-btn:hover, .go-btn:hover {
+.gold-btn:hover {
   transform: translateY(-3px);
   box-shadow: 
     inset -1px -1px 3px rgba(255,255,255,0.5),
     inset 1px 1px 3px rgba(0,0,0,0.7),
     0 10px 20px rgba(0,0,0,0.8);
-} 
+    }
