@@ -29,6 +29,7 @@ body {
 
 /* زر البوصلة SVG */
 .compass-btn {
+.compass-btn {
   position: fixed;
   bottom: 20px;
   left: 20px;
@@ -38,6 +39,21 @@ body {
   z-index: 9999;
   transition: transform 0.5s ease;
 }
+
+.compass-btn svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+/* لما تتحول لعلامة X */
+.compass-btn.close svg {
+  transform: rotate(45deg);
+}
+
+.compass-btn.close polygon {
+  fill: #FF0000; /* تخليها حمرا عند الإغلاق */
+} 
 
 .compass-btn svg line {
   stroke-dasharray: 40;
