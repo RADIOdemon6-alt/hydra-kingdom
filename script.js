@@ -11,34 +11,28 @@ const closeRequirements = document.getElementById('closeRequirements');
 
 let menuOpen = false;
 
-// حركة فتح القائمة مع سقوط العناصر
+// حركة فتح و غلق القائمة
 compassBtn.addEventListener('click', () => {
   if (!menuOpen) {
-    // فتح القائمة
-    sideMenu.style.right = '0';
-    // دوران البوصلة
+    sideMenu.classList.add('open');   // افتح القائمة
     compassBtn.style.transform = 'rotate(360deg)';
-    // اختفاء الأزرار والملاحظة
-    mainContent.classList.add('hide');
+    mainContent.classList.add('hide'); // اخفي العناصر
     noteBox.classList.add('hide');
   } else {
-    // إغلاق القائمة
-    sideMenu.style.right = '-300px';
-    // إعادة البوصلة لوضعها الطبيعي
+    sideMenu.classList.remove('open');  // اقفل القائمة
     compassBtn.style.transform = 'rotate(0deg)';
-    // ظهور الأزرار والملاحظة
-    mainContent.classList.remove('hide');
+    mainContent.classList.remove('hide'); // رجّع العناصر
     noteBox.classList.remove('hide');
   }
   menuOpen = !menuOpen;
 });
 
-// مميزات الانضمام Popup
+// Popup المميزات
 featuresBtn.addEventListener('click', () => {
   featuresPopup.style.display = 'flex';
 });
 
-// شروط الانضمام Popup
+// Popup الشروط
 requirementsBtn.addEventListener('click', () => {
   requirementsPopup.style.display = 'flex';
 });
