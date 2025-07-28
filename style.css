@@ -21,38 +21,43 @@ body {
   z-index: 1000;
 }
 
-/* اللوجو */
-.logo-box {
-  position: absolute;
-  left: 20px;
-  top: 10px;
-  width: 60px;
-  height: 60px;
-}
-
-.logo-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* عنوان المملكة */
 .top-bar h1 {
   font-size: 2rem;
   color: #FFD700;
   text-shadow: 0 2px #000;
 }
 
-/* زر البوصلة */
+/* زر البوصلة SVG */
 .compass-btn {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  font-size: 3rem;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
-  filter: drop-shadow(0 0 10px #FFD700);
-  z-index: 999;
-  transition: transform 0.7s ease;
+  z-index: 9999;
+  transition: transform 0.5s ease;
+}
+
+.compass-btn svg line {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.5s ease, transform 0.5s ease;
+}
+
+.compass-btn.close #needle1 {
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+
+.compass-btn.close #needle2 {
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+}
+
+.compass-btn.animating #needle1,
+.compass-btn.animating #needle2 {
+  stroke-dashoffset: 40;
 }
 
 /* القائمة الجانبية */
@@ -70,6 +75,11 @@ body {
   box-shadow: -5px 0 15px rgba(0,0,0,0.7);
   transition: right 0.7s ease;
   border-left: 2px solid #FFD700;
+  z-index: 1500;
+}
+
+.side-menu.open {
+  right: 0;
 }
 
 .side-menu a {
@@ -94,14 +104,15 @@ body {
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 150px;
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
-/* زر المميزات */
-#featuresBtn {
-  position: absolute;
-  top: 0;
-  right: 30px;
+.custom-btn {
   width: 140px;
   height: 140px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
@@ -118,32 +129,37 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
-/* زر الشروط */
-#requirementsBtn {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  width: 140px;
-  height: 140px;
+.custom-btn:hover {
+  transform: skew(-5deg) translateY(-3px);
+  box-shadow: inset -1px -1px 3px rgba(255,255,255,0.5),
+              inset 1px 1px 3px rgba(0,0,0,0.7),
+              0 10px 20px rgba(0,0,0,0.8);
+}
+
+/* الملاحظة تحت الأزرار */
+.note-box {
+  margin-top: 30px;
+  width: 340px;
+  height: 80px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
-  border: 2px solid #9a7e00;
-  color: #1a1a1a;
-  font-size: 1rem;
-  border-radius: 20px;
-  box-shadow: 
-    inset -2px -2px 5px rgba(255,255,255,0.3),
-    inset 2px 2px 5px rgba(0,0,0,0.5),
-    0 5px 15px rgba(0,0,0,0.7);
-  transform: skew(-5deg);
-  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.3),
+              inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+              0 5px 15px rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  text-align: center;
+  transform: skew(-5deg);
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
-/* العناصر تختفي عند فتح القائمة */
+/* إخفاء العناصر عند فتح القائمة */
 .hide {
   transform: translateY(100px);
   opacity: 0;
@@ -202,77 +218,10 @@ body {
 .close-btn:hover {
   transform: translateY(-2px);
 }
-.side-menu {
-  position: fixed;
-  top: 80px;
-  right: -300px; /* تبدأ مخفية */
-  width: 250px;
-  height: calc(100% - 80px);
-  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-  padding: 50px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.7);
-  transition: right 0.7s ease;
-  border-left: 2px solid #FFD700;
-  z-index: 1500;
-}
 
-.side-menu.open {
-  right: 0; /* تظهر عند إضافة .open */
-}
-
-.hide {
-  transform: translateY(100px);
-  opacity: 0;
-  transition: transform 0.7s ease, opacity 0.7s ease;
-}
-
-#mainContent, #noteBox {
-  transition: transform 0.7s ease, opacity 0.7s ease;
-} 
+/* تعطيل الأزرار */
 .disabled {
   pointer-events: none;
   opacity: 0.5;
   filter: grayscale(1);
-} 
-/* البوصلة الأساسية */
-.compass-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 50px;
-  height: 50px;
-  background: url('compass.png') no-repeat center;
-  background-size: contain;
-  cursor: pointer;
-  transition: transform 0.5s ease, background 0.5s ease;
-  z-index: 9999;
-}
-
-/* لما تتحول لعلامة X */
-.compass-btn.close {
-  background: none;
-}
-
-.compass-btn.close::before,
-.compass-btn.close::after {
-  content: '';
-  position: absolute;
-  width: 40px;
-  height: 4px;
-  background-color: #FFD700;
-  top: 50%;
-  left: 5px;
-  transform-origin: center;
-  transition: transform 0.5s ease;
-}
-
-.compass-btn.close::before {
-  transform: rotate(45deg);
-}
-
-.compass-btn.close::after {
-  transform: rotate(-45deg);
 }
