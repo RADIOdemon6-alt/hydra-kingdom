@@ -11,6 +11,7 @@ const closeRequirements = document.getElementById('closeRequirements');
 
 let menuOpen = false;
 
+// فتح/غلق القائمة الجانبية
 compassBtn.addEventListener('click', () => {
   menuOpen = !menuOpen;
   sideMenu.classList.toggle('open');
@@ -25,22 +26,30 @@ compassBtn.addEventListener('click', () => {
   }
 });
 
+// ظهور Popup المميزات
 featuresBtn.addEventListener('click', () => {
   if (!menuOpen) {
     featuresPopup.style.display = 'flex';
+    compassBtn.style.display = 'none'; // إخفاء البوصلة
   }
 });
 
+// ظهور Popup الشروط
 requirementsBtn.addEventListener('click', () => {
   if (!menuOpen) {
     requirementsPopup.style.display = 'flex';
+    compassBtn.style.display = 'none'; // إخفاء البوصلة
   }
 });
 
+// إغلاق Popup المميزات
 closeFeatures.addEventListener('click', () => {
   featuresPopup.style.display = 'none';
+  compassBtn.style.display = 'block'; // إظهار البوصلة
 });
 
+// إغلاق Popup الشروط
 closeRequirements.addEventListener('click', () => {
   requirementsPopup.style.display = 'none';
+  compassBtn.style.display = 'block'; // إظهار البوصلة
 });
