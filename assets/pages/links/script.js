@@ -4,20 +4,21 @@ const mainContent = document.getElementById('mainContent');
 
 let menuOpen = false;
 
+// فتح/غلق القائمة الجانبية
 compassBtn.addEventListener('click', () => {
-  if (!menuOpen) {
-    sideMenu.classList.add('open');
-    compassBtn.classList.add('close');
-    mainContent.classList.add('hide');
-  } else {
-    sideMenu.classList.remove('open');
-    compassBtn.classList.remove('close');
-    mainContent.classList.remove('hide');
-  }
   menuOpen = !menuOpen;
+  sideMenu.classList.toggle('open');
+  compassBtn.classList.toggle('active');
+
+  if (menuOpen) {
+    mainContent.classList.add('hide');
+    noteBox.classList.add('hide');
+  } else {
+    mainContent.classList.remove('hide');
+    noteBox.classList.remove('hide');
+  }
 });
 
-// نسخ الروابط
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const link = btn.dataset.link;
