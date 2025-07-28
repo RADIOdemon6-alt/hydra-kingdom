@@ -27,7 +27,7 @@ body {
   text-shadow: 0 2px #000;
 }
 
-/* زر البوصلة SVG */
+/* زر البوصلة (SVG) */
 .compass-btn {
   position: fixed;
   bottom: 20px;
@@ -45,33 +45,8 @@ body {
   transition: transform 0.5s ease;
 }
 
-.compass-btn.close svg {
+.compass-btn.active svg {
   transform: rotate(45deg);
-}
-
-.compass-btn.close polygon {
-  fill: #FF0000;
-}
-
-.compass-btn svg line {
-  stroke-dasharray: 40;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 0.5s ease, transform 0.5s ease;
-}
-
-.compass-btn.close #needle1 {
-  transform: rotate(45deg);
-  transform-origin: 50% 50%;
-}
-
-.compass-btn.close #needle2 {
-  transform: rotate(-45deg);
-  transform-origin: 50% 50%;
-}
-
-.compass-btn.animating #needle1,
-.compass-btn.animating #needle2 {
-  stroke-dashoffset: 40;
 }
 
 /* القائمة الجانبية */
@@ -108,7 +83,6 @@ body {
 .main-content {
   position: relative;
   width: 100%;
-  height: auto;
   margin-top: 200px;
   display: flex;
   justify-content: center;
@@ -125,10 +99,9 @@ body {
   color: #1a1a1a;
   font-size: 1rem;
   border-radius: 20px;
-  box-shadow: 
-    inset -2px -2px 5px rgba(255,255,255,0.3),
-    inset 2px 2px 5px rgba(0,0,0,0.5),
-    0 5px 15px rgba(0,0,0,0.7);
+  box-shadow: inset -2px -2px 5px rgba(255,255,255,0.3),
+              inset 2px 2px 5px rgba(0,0,0,0.5),
+              0 5px 15px rgba(0,0,0,0.7);
   transform: skew(-5deg);
   cursor: pointer;
   display: flex;
@@ -146,7 +119,7 @@ body {
 
 /* الملاحظة */
 .note-box {
-  margin-top: 30px;
+  margin: 30px auto;
   width: 340px;
   height: 80px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
@@ -162,11 +135,9 @@ body {
   text-align: center;
   transform: skew(-5deg);
   transition: transform 0.7s ease, opacity 0.7s ease;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* العناصر تختفي عند فتح القائمة */
+/* عند فتح القائمة */
 .hide {
   transform: translateY(100px);
   opacity: 0;
@@ -224,10 +195,4 @@ body {
 
 .close-btn:hover {
   transform: translateY(-2px);
-}
-
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-  filter: grayscale(1);
 }
