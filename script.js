@@ -14,26 +14,43 @@ let menuOpen = false;
 // حركة فتح و غلق القائمة
 compassBtn.addEventListener('click', () => {
   if (!menuOpen) {
-    sideMenu.classList.add('open');   // افتح القائمة
+    // فتح القائمة
+    sideMenu.classList.add('open');
     compassBtn.style.transform = 'rotate(360deg)';
-    mainContent.classList.add('hide'); // اخفي العناصر
+    mainContent.classList.add('hide');
     noteBox.classList.add('hide');
+    // تعطيل الأزرار
+    featuresBtn.classList.add('disabled');
+    requirementsBtn.classList.add('disabled');
   } else {
-    sideMenu.classList.remove('open');  // اقفل القائمة
+    // غلق القائمة
+    sideMenu.classList.remove('open');
     compassBtn.style.transform = 'rotate(0deg)';
-    mainContent.classList.remove('hide'); // رجّع العناصر
+    mainContent.classList.remove('hide');
     noteBox.classList.remove('hide');
+    // تفعيل الأزرار
+    featuresBtn.classList.remove('disabled');
+    requirementsBtn.classList.remove('disabled');
   }
   menuOpen = !menuOpen;
 });
 
-// Popup المميزات
-featuresBtn.addEventListener('click', () => {
+// منع الضغط على الأزرار لما القائمة مفتوحة
+featuresBtn.addEventListener('click', (e) => {
+  if (featuresBtn.classList.contains('disabled')) {
+    e.stopPropagation();
+    e.preventDefault();
+    return;
+  }
   featuresPopup.style.display = 'flex';
 });
 
-// Popup الشروط
-requirementsBtn.addEventListener('click', () => {
+requirementsBtn.addEventListener('click', (e) => {
+  if (requirementsBtn.classList.contains('disabled')) {
+    e.stopPropagation();
+    e.preventDefault();
+    return;
+  }
   requirementsPopup.style.display = 'flex';
 });
 
