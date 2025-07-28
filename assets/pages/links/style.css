@@ -21,12 +21,6 @@ body {
   z-index: 1000;
 }
 
-.top-bar h1 {
-  font-size: 2rem;
-  color: #FFD700;
-  text-shadow: 0 2px #000;
-}
-
 /* زر البوصلة */
 .compass-btn {
   position: fixed;
@@ -34,27 +28,37 @@ body {
   left: 20px;
   width: 60px;
   height: 60px;
+  background: url('compass.png') no-repeat center;
+  background-size: contain;
   cursor: pointer;
   z-index: 9999;
+  transition: transform 0.5s ease, background 0.5s ease;
+}
+
+/* لما تتحول لعلامة X */
+.compass-btn.close {
+  background: none;
+}
+
+.compass-btn.close::before,
+.compass-btn.close::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 4px;
+  background-color: #FFD700;
+  top: 50%;
+  left: 10px;
+  transform-origin: center;
   transition: transform 0.5s ease;
 }
 
-.compass-btn svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* أنميشن تحويل البوصلة إلى X */
-.compass-btn.close #needle1 {
+.compass-btn.close::before {
   transform: rotate(45deg);
-  transform-origin: 50% 50%;
-  stroke: #FF0000;
 }
 
-.compass-btn.close #needle2 {
+.compass-btn.close::after {
   transform: rotate(-45deg);
-  transform-origin: 50% 50%;
-  stroke: #FF0000;
 }
 
 /* القائمة الجانبية */
@@ -70,7 +74,7 @@ body {
   flex-direction: column;
   gap: 30px;
   box-shadow: -5px 0 15px rgba(0,0,0,0.7);
-  transition: right 0.5s ease;
+  transition: right 0.7s ease;
   border-left: 2px solid #FFD700;
   z-index: 1500;
 }
@@ -79,98 +83,49 @@ body {
   right: 0;
 }
 
-.side-menu a {
-  font-size: 1.5rem;
-  color: #FFD700;
-  text-decoration: none;
-  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
-  transform: perspective(600px) rotateY(-5deg);
-}
-
-/* المكونات الرئيسية */
-.main-content {
-  position: relative;
-  width: 100%;
-  height: auto;
-  margin-top: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.7s ease, opacity 0.7s ease;
-}
-
-.custom-btn {
-  width: 140px;
-  height: 140px;
-  background: linear-gradient(145deg, #FFD700, #cc9900);
-  border: 2px solid #9a7e00;
-  color: #1a1a1a;
-  font-size: 1rem;
-  border-radius: 20px;
-  box-shadow: 
-    inset -2px -2px 5px rgba(255,255,255,0.3),
-    inset 2px 2px 5px rgba(0,0,0,0.5),
-    0 5px 15px rgba(0,0,0,0.7);
-  transform: skew(-5deg);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-  transition: all 0.3s ease;
-}
-
-.custom-btn:hover {
-  transform: skew(-5deg) translateY(-3px);
-  box-shadow: inset -1px -1px 3px rgba(255,255,255,0.5),
-              inset 1px 1px 3px rgba(0,0,0,0.7),
-              0 10px 20px rgba(0,0,0,0.8);
-}
-
+/* العناصر تختفي عند فتح القائمة */
 .hide {
   transform: translateY(100px);
   opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
-.popup {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
+/* محتوى المكعبات */
+.main-content {
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  gap: 20px;
+  margin-top: 150px;
+  transition: all 0.7s ease;
 }
 
-.popup-content {
-  background: #1b1b1b;
-  padding: 30px;
-  border: 2px solid #FFD700;
-  border-radius: 20px;
-  color: #fff;
-  width: 80%;
-  max-width: 500px;
-  text-align: right;
+/* المكعبات */
+.cube {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(145deg, #FFD700, #cc9900);
+  border-radius: 15px;
+  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.3),
+              inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+              0 5px 15px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  font-size: 1rem;
+  transform: skew(-5deg);
 }
 
-.popup-content h2 {
-  color: #FFD700;
-  margin-bottom: 15px;
-}
-
-.popup-content ul {
-  list-style: none;
-  padding: 0;
-}
-
-.popup-content li {
-  margin: 10px 0;
-}
-
-.close-btn {
+/* الأزرار تحت المكعبات */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   margin-top: 20px;
+}
+
+.copy-btn, .go-btn {
   padding: 10px 20px;
   background: #FFD700;
   border: none;
@@ -181,12 +136,6 @@ body {
   transition: all 0.3s ease;
 }
 
-.close-btn:hover {
+.copy-btn:hover, .go-btn:hover {
   transform: translateY(-2px);
 }
-
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-  filter: grayscale(1);
-    }
