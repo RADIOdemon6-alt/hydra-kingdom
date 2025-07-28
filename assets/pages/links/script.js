@@ -1,36 +1,36 @@
 const compassBtn = document.getElementById('compassBtn');
 const sideMenu = document.getElementById('sideMenu');
 const mainContent = document.getElementById('mainContent');
-const featuresPopup = document.getElementById('featuresPopup');
-const requirementsPopup = document.getElementById('requirementsPopup');
-const featuresBtn = document.getElementById('featuresBtn');
-const requirementsBtn = document.getElementById('requirementsBtn');
-const closeFeatures = document.getElementById('closeFeatures');
-const closeRequirements = document.getElementById('closeRequirements');
 
-// فتح/غلق القائمة بتحويل البوصلة X والعكس
+let menuOpen = false;
+
 compassBtn.addEventListener('click', () => {
-  compassBtn.classList.toggle('close');
-  sideMenu.classList.toggle('open');
-  mainContent.classList.toggle('hide');
+  if (!menuOpen) {
+    sideMenu.classList.add('open');
+    compassBtn.classList.add('close');
+    mainContent.classList.add('hide');
+  } else {
+    sideMenu.classList.remove('open');
+    compassBtn.classList.remove('close');
+    mainContent.classList.remove('hide');
+  }
+  menuOpen = !menuOpen;
 });
 
-// فتح Popup المميزات
-featuresBtn.addEventListener('click', () => {
-  featuresPopup.style.display = 'flex';
+// نسخ الروابط
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const link = btn.dataset.link;
+    navigator.clipboard.writeText(link).then(() => {
+      alert('تم نسخ الرابط!');
+    });
+  });
 });
 
-// فتح Popup الشروط
-requirementsBtn.addEventListener('click', () => {
-  requirementsPopup.style.display = 'flex';
-});
-
-// إغلاق Popup المميزات
-closeFeatures.addEventListener('click', () => {
-  featuresPopup.style.display = 'none';
-});
-
-// إغلاق Popup الشروط
-closeRequirements.addEventListener('click', () => {
-  requirementsPopup.style.display = 'none';
+// فتح الروابط
+document.querySelectorAll('.go-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const link = btn.dataset.link;
+    window.open(link, '_blank');
+  });
 });
