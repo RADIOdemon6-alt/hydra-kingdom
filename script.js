@@ -10,49 +10,37 @@ const closeFeatures = document.getElementById('closeFeatures');
 const closeRequirements = document.getElementById('closeRequirements');
 
 let menuOpen = false;
-let animating = false;
 
 compassBtn.addEventListener('click', () => {
-  if (animating) return;
-  animating = true;
+  menuOpen = !menuOpen;
+  sideMenu.classList.toggle('open');
+  compassBtn.classList.toggle('active');
 
-  if (!menuOpen) {
-    // فتح القائمة
-    sideMenu.classList.add('open');
+  if (menuOpen) {
     mainContent.classList.add('hide');
     noteBox.classList.add('hide');
-    compassBtn.classList.add('close');
   } else {
-    // غلق القائمة
-    sideMenu.classList.remove('open');
     mainContent.classList.remove('hide');
     noteBox.classList.remove('hide');
-    compassBtn.classList.remove('close');
   }
-
-  menuOpen = !menuOpen;
-
-  setTimeout(() => {
-    animating = false;
-  }, 500); // وقت الانميشن
 });
 
-// Popup مميزات الانضمام
 featuresBtn.addEventListener('click', () => {
-  featuresPopup.style.display = 'flex';
+  if (!menuOpen) {
+    featuresPopup.style.display = 'flex';
+  }
 });
 
-// Popup شروط الانضمام
 requirementsBtn.addEventListener('click', () => {
-  requirementsPopup.style.display = 'flex';
+  if (!menuOpen) {
+    requirementsPopup.style.display = 'flex';
+  }
 });
 
-// إغلاق Popup المميزات
 closeFeatures.addEventListener('click', () => {
   featuresPopup.style.display = 'none';
 });
 
-// إغلاق Popup الشروط
 closeRequirements.addEventListener('click', () => {
   requirementsPopup.style.display = 'none';
 });
