@@ -10,36 +10,44 @@ const closeFeatures = document.getElementById('closeFeatures');
 const closeRequirements = document.getElementById('closeRequirements');
 
 let menuOpen = false;
+let animating = false;
 
+// فتح/إغلاق القائمة مع دوران البوصلة وتحوّلها X
 compassBtn.addEventListener('click', () => {
-  if (!menuOpen) {
-    // فتح القائمة
-    sideMenu.classList.add('open');
-    compassBtn.classList.add('close'); // تحويل لعلامة X
-    mainContent.style.display = 'none';
-    noteBox.style.display = 'none';
-  } else {
-    // قفل القائمة
-    sideMenu.classList.remove('open');
-    compassBtn.classList.remove('close'); // رجوع لبوصلة
-    mainContent.style.display = 'flex';
-    noteBox.style.display = 'flex';
-  }
-  menuOpen = !menuOpen;
+  if (animating) return; // منع السبام
+  animating = true;
+
+  compassBtn.classList.add('animating');
+
+  setTimeout(() => {
+    compassBtn.classList.remove('animating');
+    compassBtn.classList.toggle('close');
+
+    if (!menuOpen) {
+      // فتح القائمة
+      sideMenu.classList.add('open');
+      mainContent.classList.add('hide');
+      noteBox.classList.add('hide');
+    } else {
+      // غلق القائمة
+      sideMenu.classList.remove('open');
+      mainContent.classList.remove('hide');
+      noteBox.classList.remove('hide');
+    }
+
+    menuOpen = !menuOpen;
+    animating = false;
+  }, 500); // زمن الانميشن
 });
 
-// فتح Popup المميزات
+// مميزات الانضمام Popup
 featuresBtn.addEventListener('click', () => {
-  if (!menuOpen) {
-    featuresPopup.style.display = 'flex';
-  }
+  featuresPopup.style.display = 'flex';
 });
 
-// فتح Popup الشروط
+// شروط الانضمام Popup
 requirementsBtn.addEventListener('click', () => {
-  if (!menuOpen) {
-    requirementsPopup.style.display = 'flex';
-  }
+  requirementsPopup.style.display = 'flex';
 });
 
 // إغلاق Popup المميزات
