@@ -12,40 +12,37 @@ const closeRequirements = document.getElementById('closeRequirements');
 let menuOpen = false;
 let animating = false;
 
-// فتح/إغلاق القائمة مع دوران البوصلة وتحوّلها X
 compassBtn.addEventListener('click', () => {
-  if (animating) return; // منع السبام
+  if (animating) return;
   animating = true;
 
-  compassBtn.classList.add('animating');
+  if (!menuOpen) {
+    // فتح القائمة
+    sideMenu.classList.add('open');
+    mainContent.classList.add('hide');
+    noteBox.classList.add('hide');
+    compassBtn.classList.add('close');
+  } else {
+    // غلق القائمة
+    sideMenu.classList.remove('open');
+    mainContent.classList.remove('hide');
+    noteBox.classList.remove('hide');
+    compassBtn.classList.remove('close');
+  }
+
+  menuOpen = !menuOpen;
 
   setTimeout(() => {
-    compassBtn.classList.remove('animating');
-    compassBtn.classList.toggle('close');
-
-    if (!menuOpen) {
-      // فتح القائمة
-      sideMenu.classList.add('open');
-      mainContent.classList.add('hide');
-      noteBox.classList.add('hide');
-    } else {
-      // غلق القائمة
-      sideMenu.classList.remove('open');
-      mainContent.classList.remove('hide');
-      noteBox.classList.remove('hide');
-    }
-
-    menuOpen = !menuOpen;
     animating = false;
-  }, 500); // زمن الانميشن
+  }, 500); // وقت الانميشن
 });
 
-// مميزات الانضمام Popup
+// Popup مميزات الانضمام
 featuresBtn.addEventListener('click', () => {
   featuresPopup.style.display = 'flex';
 });
 
-// شروط الانضمام Popup
+// Popup شروط الانضمام
 requirementsBtn.addEventListener('click', () => {
   requirementsPopup.style.display = 'flex';
 });
