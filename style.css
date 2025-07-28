@@ -21,6 +21,7 @@ body {
   z-index: 1000;
 }
 
+/* اللوجو */
 .logo-box {
   position: absolute;
   left: 20px;
@@ -35,6 +36,7 @@ body {
   object-fit: contain;
 }
 
+/* عنوان المملكة */
 .top-bar h1 {
   font-size: 2rem;
   color: #FFD700;
@@ -89,40 +91,17 @@ body {
 
 /* المحتوى الرئيسي */
 .main-content {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: auto auto;
-  align-items: center;
-  justify-items: center;
-  gap: 20px;
+  position: relative;
+  width: 100%;
+  height: auto;
   margin-top: 150px;
-}
-
-/* زر الشروط */
-#requirementsBtn {
-  grid-column: 1;
-  width: 140px;
-  height: 140px;
-  background: linear-gradient(145deg, #FFD700, #cc9900);
-  border: 2px solid #9a7e00;
-  color: #1a1a1a;
-  font-size: 1rem;
-  border-radius: 20px;
-  box-shadow: 
-    inset -2px -2px 5px rgba(255,255,255,0.3),
-    inset 2px 2px 5px rgba(0,0,0,0.5),
-    0 5px 15px rgba(0,0,0,0.7);
-  transform: skew(-5deg);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
 }
 
 /* زر المميزات */
 #featuresBtn {
-  grid-column: 3;
+  position: absolute;
+  top: 0;
+  right: 30px;
   width: 140px;
   height: 140px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
@@ -139,27 +118,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
 }
 
-/* الملاحظة */
-.note-box {
-  grid-column: 1 / span 3;
-  width: 340px;
-  height: 80px;
+/* زر الشروط */
+#requirementsBtn {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 140px;
+  height: 140px;
   background: linear-gradient(145deg, #FFD700, #cc9900);
-  border-radius: 15px;
-  box-shadow: inset -3px -3px 6px rgba(255, 255, 255, 0.3),
-              inset 3px 3px 6px rgba(0, 0, 0, 0.5),
-              0 5px 15px rgba(0, 0, 0, 0.7);
+  border: 2px solid #9a7e00;
+  color: #1a1a1a;
+  font-size: 1rem;
+  border-radius: 20px;
+  box-shadow: 
+    inset -2px -2px 5px rgba(255,255,255,0.3),
+    inset 2px 2px 5px rgba(0,0,0,0.5),
+    0 5px 15px rgba(0,0,0,0.7);
+  transform: skew(-5deg);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
-  font-size: 0.9rem;
-  text-align: center;
-  transform: skew(-5deg);
-  transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
 /* العناصر تختفي عند فتح القائمة */
