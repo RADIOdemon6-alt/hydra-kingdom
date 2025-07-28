@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مملكة هيدرا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- البار العلوي -->
+  <div class="top-bar">
+    <h1>مملكة هيدرا</h1>
+  </div>
+
+<!-- زر البوصلة -->
+<div class="compass-btn" id="compassBtn">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" stroke="#FFD700" stroke-width="5" fill="none"/>
+    <polygon points="50,10 55,50 50,90 45,50" fill="#FFD700"/>
+    <line id="needle1" x1="50" y1="50" x2="50" y2="15" stroke="#FFD700" stroke-width="3"/>
+    <line id="needle2" x1="50" y1="50" x2="50" y2="85" stroke="#FFD700" stroke-width="3"/>
+  </svg>
+</div>
+
+<!-- القائمة الجانبية -->
+<div class="side-menu" id="sideMenu">
+  <a href="index.html">الصفحه الرئيسيه 🌙</a>
+  <a href="../assets/pages/links/index.html">🏰 روابط المملكة</a>
+  <a href="#">📝 استمارات المملكة</a>
+  <a href="#">👑 الرتب العليا</a>
+  <a href="#">⚔️ نقابات المملكة</a>
+</div>
+
+  <!-- المكعبات -->
+  <div class="main-content">
+    <div class="gold-box" data-link="https://chat.whatsapp.com/YourGroupLink1">
+      بوابة المملكة
+      <div class="btn-group">
+        <button class="gold-btn copy-btn">نسخ الرابط</button>
+        <a href="https://chat.whatsapp.com/YourGroupLink1" target="_blank" class="gold-btn">زيارة</a>
+      </div>
+    </div>
+
+    <div class="gold-box" data-link="https://chat.whatsapp.com/YourGroupLink2">
+      صحيفة المملكة
+      <div class="btn-group">
+        <button class="gold-btn copy-btn">نسخ الرابط</button>
+        <a href="https://chat.whatsapp.com/YourGroupLink2" target="_blank" class="gold-btn">زيارة</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
