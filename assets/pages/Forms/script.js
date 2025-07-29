@@ -1,4 +1,4 @@
-const token = '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';
+const token = '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';
 const repoOwner = 'RADIOdemon6-alt';
 const repoName = 'hydra-kingdom';
 const folderPath = 'assets/storage';
