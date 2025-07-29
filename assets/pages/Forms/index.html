@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مملكة هيدرا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- البار العلوي -->
+  <div class="top-bar">
+    <h1>مملكة هيدرا</h1>
+  </div>
+
+  <!-- زر البوصلة -->
+  <div class="compass-btn" id="compassBtn">
+    <svg width="60" height="60" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" stroke="#FFD700" stroke-width="4" fill="none"/>
+      <polygon points="50,15 55,50 50,85 45,50" fill="#FFD700"/>
+      <polygon points="15,50 50,45 85,50 50,55" fill="#FFD700"/>
+    </svg>
+  </div>
+
+  <!-- القائمة الجانبية -->
+  <div class="side-menu" id="sideMenu">
+    <a href="https://hydra-kingdom.vercel.app/">🌙 الصفحة الرئيسية</a>
+    <a href="#">♣ روابط المملكة</a>
+    <a href="#">👑 الرتب العليا</a>
+    <a href="#">⚔️ نقابات المملكة</a>
+  </div>
+
+  <!-- قائمة الأزرار الديناميكية -->
+  <div class="forms-list" id="formsList"></div>
+
+  <!-- Popup عرض محتوى الملفات -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2 id="popupTitle"></h2>
+      <pre id="popupContent"></pre>
+      <div class="btn-group">
+        <button class="gold-btn" id="copyContent">نسخ</button>
+        <button class="gold-btn" id="closePopup">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html> 
