@@ -50,18 +50,19 @@ async function listFilesAndFolders(path) {
     return;
   }
 
-  let hasFiles = false;
+  let hasContent = false;
 
   for (const item of items) {
     if (item.type === 'dir') {
+      hasContent = true;
       createFolderButton(item);
     } else if (item.type === 'file' && item.name.endsWith('.txt')) {
-      hasFiles = true;
+      hasContent = true;
       createFileButton(item);
     }
   }
 
-  if (!hasFiles && !items.some(i => i.type === 'dir')) {
+  if (!hasContent) {
     createEmptyFolderButton(path);
   }
 }
@@ -80,21 +81,47 @@ function createFolderButton(folder) {
   box.innerText = '📁 ' + folder.name;
   box.addEventListener('click', async () => {
     formsList.innerHTML = ''; // Clear current view
-    await listFilesAndFolders(folder.path);
+    const items = await fetchGitHubContents(folder.path);
+
+    if (items.length === 0) {
+      // المجلد فارغ تماماً
+      showEmptyFolderPopup(folder.name);
+      return;
+    }
+
+    let hasContent = false;
+
+    for (const item of items) {
+      if (item.type === 'dir') {
+        hasContent = true;
+        createFolderButton(item);
+      } else if (item.type === 'file' && item.name.endsWith('.txt')) {
+        hasContent = true;
+        createFileButton(item);
+      }
+    }
+
+    if (!hasContent) {
+      showEmptyFolderPopup(folder.name);
+    }
   });
   formsList.appendChild(box);
 }
 
-function createEmptyFolderButton(path) {
+function createEmptyFolderButton(folderName) {
   const box = document.createElement('div');
   box.className = 'form-box empty-folder';
-  box.innerText = '📁 ' + path.split('/').pop(); // اسم المجلد
+  box.innerText = '📁 ' + folderName.split('/').pop(); // اسم المجلد
   box.addEventListener('click', () => {
-    popupTitle.innerText = path.split('/').pop();
-    popupContent.innerText = 'خطأ في المسار أو المجلد فارغ!';
-    popup.classList.add('show');
+    showEmptyFolderPopup(folderName.split('/').pop());
   });
   formsList.appendChild(box);
+}
+
+function showEmptyFolderPopup(folderName) {
+  popupTitle.innerText = folderName;
+  popupContent.innerText = '📂 هذا المجلد فارغ أو لا يحتوي على ملفات نصية!';
+  popup.classList.add('show');
 }
 
 async function openFilePopup(file) {
