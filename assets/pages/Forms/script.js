@@ -14,7 +14,6 @@ const mainContent = document.getElementById('mainContent') || document.createEle
 const noteBox = document.getElementById('noteBox') || document.createElement('div');
 
 let menuOpen = false;
-let foundFiles = 0; // عداد لعدد الملفات التي تم العثور عليها
 
 compassBtn.addEventListener('click', () => {
   menuOpen = !menuOpen;
@@ -43,19 +42,27 @@ async function fetchGitHubContents(path) {
   return await response.json();
 }
 
-async function listFilesRecursively(path) {
+async function listFilesAndFolders(path) {
   const items = await fetchGitHubContents(path);
+
   if (items.length === 0) {
-    return; // مجلد فارغ
+    createEmptyFolderButton(path);
+    return;
   }
+
+  let hasFiles = false;
 
   for (const item of items) {
     if (item.type === 'dir') {
-      await listFilesRecursively(item.path);
+      createFolderButton(item);
     } else if (item.type === 'file' && item.name.endsWith('.txt')) {
-      foundFiles++;
+      hasFiles = true;
       createFileButton(item);
     }
+  }
+
+  if (!hasFiles && !items.some(i => i.type === 'dir')) {
+    createEmptyFolderButton(path);
   }
 }
 
@@ -64,6 +71,29 @@ function createFileButton(file) {
   box.className = 'form-box';
   box.innerText = file.name;
   box.addEventListener('click', () => openFilePopup(file));
+  formsList.appendChild(box);
+}
+
+function createFolderButton(folder) {
+  const box = document.createElement('div');
+  box.className = 'form-box folder';
+  box.innerText = '📁 ' + folder.name;
+  box.addEventListener('click', async () => {
+    formsList.innerHTML = ''; // Clear current view
+    await listFilesAndFolders(folder.path);
+  });
+  formsList.appendChild(box);
+}
+
+function createEmptyFolderButton(path) {
+  const box = document.createElement('div');
+  box.className = 'form-box empty-folder';
+  box.innerText = '📁 ' + path.split('/').pop(); // اسم المجلد
+  box.addEventListener('click', () => {
+    popupTitle.innerText = path.split('/').pop();
+    popupContent.innerText = 'خطأ في المسار أو المجلد فارغ!';
+    popup.classList.add('show');
+  });
   formsList.appendChild(box);
 }
 
@@ -85,15 +115,5 @@ document.getElementById('copyContent').addEventListener('click', () => {
   });
 });
 
-// بدء التحميل
-(async () => {
-  await listFilesRecursively(folderPath);
-
-  // بعد انتهاء البحث بالكامل
-  if (foundFiles === 0) {
-    const message = document.createElement('div');
-    message.className = 'error-message';
-    message.innerText = 'خطأ في المسار أو المجلد فارغ!';
-    formsList.appendChild(message);
-  }
-})();
+// بدء التحميل من المجلد الرئيسي
+listFilesAndFolders(folderPath);
