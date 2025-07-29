@@ -14,8 +14,8 @@ const mainContent = document.getElementById('mainContent') || document.createEle
 const noteBox = document.getElementById('noteBox') || document.createElement('div');
 
 let menuOpen = false;
+let foundFiles = 0; // عداد لعدد الملفات التي تم العثور عليها
 
-// فتح/غلق القائمة الجانبية
 compassBtn.addEventListener('click', () => {
   menuOpen = !menuOpen;
   sideMenu.classList.toggle('open');
@@ -30,7 +30,6 @@ compassBtn.addEventListener('click', () => {
   }
 });
 
-// الدالة التي تجلب محتويات مجلد من GitHub
 async function fetchGitHubContents(path) {
   const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
   const response = await fetch(url, {
@@ -44,21 +43,22 @@ async function fetchGitHubContents(path) {
   return await response.json();
 }
 
-// دالة لقراءة الملفات والمجلدات بداخل المسار (بشكل متداخل)
 async function listFilesRecursively(path) {
   const items = await fetchGitHubContents(path);
+  if (items.length === 0) {
+    return; // مجلد فارغ
+  }
 
   for (const item of items) {
     if (item.type === 'dir') {
-      // استدعاء تكراري للمجلد الفرعي
       await listFilesRecursively(item.path);
     } else if (item.type === 'file' && item.name.endsWith('.txt')) {
+      foundFiles++;
       createFileButton(item);
     }
   }
 }
 
-// إنشاء زر لكل ملف
 function createFileButton(file) {
   const box = document.createElement('div');
   box.className = 'form-box';
@@ -67,7 +67,6 @@ function createFileButton(file) {
   formsList.appendChild(box);
 }
 
-// فتح الملف في popup
 async function openFilePopup(file) {
   const response = await fetch(file.download_url);
   const content = await response.text();
@@ -76,17 +75,25 @@ async function openFilePopup(file) {
   popup.classList.add('show');
 }
 
-// إغلاق popup
 document.getElementById('closePopup').addEventListener('click', () => {
   popup.classList.remove('show');
 });
 
-// نسخ المحتوى
 document.getElementById('copyContent').addEventListener('click', () => {
   navigator.clipboard.writeText(popupContent.innerText).then(() => {
     alert('تم نسخ المحتوى!');
   });
 });
 
-// بدء التحميل من المسار الرئيسي بشكل متداخل (Recursive)
-listFilesRecursively(folderPath);
+// بدء التحميل
+(async () => {
+  await listFilesRecursively(folderPath);
+
+  // بعد انتهاء البحث بالكامل
+  if (foundFiles === 0) {
+    const message = document.createElement('div');
+    message.className = 'error-message';
+    message.innerText = 'خطأ في المسار أو المجلد فارغ!';
+    formsList.appendChild(message);
+  }
+})();
