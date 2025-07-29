@@ -1,84 +1,86 @@
-const token = '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';
-const repoOwner = 'RADIOdemon6-alt';
-const repoName = 'hydra-kingdom';
-const folderPath = '../assets/storage';
-const formsList = document.getElementById('formsList');
-const popup = document.getElementById('popup');
-const popupTitle = document.getElementById('popupTitle');
-const popupContent = document.getElementById('popupContent');
+const token = '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';  
+const repoOwner = 'RADIOdemon6-alt';  
+const repoName = 'hydra-kingdom';  
+const folderPath = 'assets/storage';  
 
-async function fetchGitHubContents(path) {
-  const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `token ${token}`
-    }
-  });
-  return await response.json();
-}
+const formsList = document.getElementById('formsList');  
+const popup = document.getElementById('popup');  
+const popupTitle = document.getElementById('popupTitle');  
+const popupContent = document.getElementById('popupContent');  
+const compassBtn = document.getElementById('compassBtn');  
+const sideMenu = document.getElementById('sideMenu');  
 
-async function listDirectories(path) {
-  const items = await fetchGitHubContents(path);
+// لو عندك عناصر mainContent و noteBox عرّفهم هنا  
+const mainContent = document.getElementById('mainContent') || document.createElement('div');  
+const noteBox = document.getElementById('noteBox') || document.createElement('div');  
 
-  for (const item of items) {
-    if (item.type === 'dir') {
-      createFolderButton(item);
-    }
-  }
-}
+let menuOpen = false;  
 
-function createFolderButton(folder) {
-  const button = document.createElement('button');
-  button.className = 'gold-btn folder-btn';
-  button.innerText = `📂 ${folder.name}`;
-  button.addEventListener('click', () => listFiles(folder.path));
-  formsList.appendChild(button);
-}
+// فتح/غلق القائمة الجانبية  
+compassBtn.addEventListener('click', () => {  
+  menuOpen = !menuOpen;  
+  sideMenu.classList.toggle('open');  
+  compassBtn.classList.toggle('active');  
 
-async function listFiles(path) {
-  const items = await fetchGitHubContents(path);
+  if (menuOpen) {  
+    mainContent.classList.add('hide');  
+    noteBox.classList.add('hide');  
+  } else {  
+    mainContent.classList.remove('hide');  
+    noteBox.classList.remove('hide');  
+  }  
+});  
 
-  // Clear previous file buttons (optional if you want)
-  let existing = document.querySelector(`.files-container[data-folder="${path}"]`);
-  if (existing) {
-    existing.remove(); // Toggle off if already exists
-    return;
-  }
+async function fetchGitHubContents(path) {  
+  const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;  
+  const response = await fetch(url, {  
+    headers: {  
+      Authorization: `token ${token}`  
+    }  
+  });  
+  if (!response.ok) {  
+    console.error('Failed to fetch:', response.status);  
+    return [];  
+  }  
+  return await response.json();  
+}  
 
-  const container = document.createElement('div');
-  container.className = 'files-container';
-  container.dataset.folder = path;
+async function listFiles(path) {  
+  const items = await fetchGitHubContents(path);  
+  for (const item of items) {  
+    if (item.type === 'dir') {  
+      await listFiles(item.path); // مجلد فرعي  
+    } else if (item.type === 'file' && item.name.endsWith('.txt')) {  
+      createFileButton(item);  
+    }  
+  }  
+}  
 
-  for (const item of items) {
-    if (item.type === 'file' && item.name.endsWith('.txt')) {
-      const fileButton = document.createElement('button');
-      fileButton.className = 'gold-btn file-btn';
-      fileButton.innerText = item.name;
-      fileButton.addEventListener('click', () => openFilePopup(item));
-      container.appendChild(fileButton);
-    }
-  }
+function createFileButton(file) {  
+  const box = document.createElement('div');  
+  box.className = 'form-box';  
+  box.innerText = file.name;  
+  box.addEventListener('click', () => openFilePopup(file));  
+  formsList.appendChild(box);  
+}  
 
-  formsList.appendChild(container);
-}
+async function openFilePopup(file) {  
+  const response = await fetch(file.download_url);  
+  const content = await response.text();  
+  popupTitle.innerText = file.name;  
+  popupContent.innerText = content;  
+  popup.classList.add('show');  
+}  
 
-async function openFilePopup(file) {
-  const response = await fetch(file.download_url);
-  const content = await response.text();
-  popupTitle.innerText = file.name;
-  popupContent.innerText = content;
-  popup.classList.add('show');
-}
+document.getElementById('closePopup').addEventListener('click', () => {  
+  popup.classList.remove('show');  
+});  
 
-document.getElementById('closePopup').addEventListener('click', () => {
-  popup.classList.remove('show');
-});
+document.getElementById('copyContent').addEventListener('click', () => {  
+  navigator.clipboard.writeText(popupContent.innerText).then(() => {  
+    alert('تم نسخ المحتوى!');  
+  });  
+});  
 
-document.getElementById('copyContent').addEventListener('click', () => {
-  navigator.clipboard.writeText(popupContent.innerText).then(() => {
-    alert('تم نسخ المحتوى!');
-  });
-});
-
-// Start loading directories
-listDirectories(folderPath);
+// بدء التحميل  
+listFiles(folderPath);
